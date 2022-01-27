@@ -13,8 +13,8 @@
         <parameter name="url" value="https://nypost.com/"/>
 
         <classes>
-<!--            <class name="nypnavigation.NYPLandingPage"/>-->
-            <class name="nypnavigation.TestNYPSectionMenu"/>
+            <class name="nypnavigation.TestAllFunctionality"/>
+<!--            <class name="nypnavigation.TestNYPSectionMenu"/>-->
         </classes>
 
     </test>
