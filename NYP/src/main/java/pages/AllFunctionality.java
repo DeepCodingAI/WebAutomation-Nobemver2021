@@ -5,6 +5,7 @@ import datafetch.FetchTheSteps;
 import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import reporting.TestLogger;
 
 import java.io.IOException;
 
@@ -18,6 +19,7 @@ public class AllFunctionality {
     String captureUrl = "https://nypost.com/";
 
     public void logIn(WebDriver driver){
+        TestLogger.log(getClass().getSimpleName() + ": " + CommonAPI.convertToString(new Object(){}.getClass().getEnclosingMethod().getName()));
         landingPage = PageFactory.initElements(driver, LandingPage.class);
         logInPage = PageFactory.initElements(driver, LogInPage.class);
         landingPage.clickOnLogIn();
@@ -26,6 +28,7 @@ public class AllFunctionality {
         //logInPage.clickOnLogInSubmitButton();
     }
     public void search(WebDriver driver){
+        TestLogger.log(getClass().getSimpleName() + ": " + CommonAPI.convertToString(new Object(){}.getClass().getEnclosingMethod().getName()));
         landingPage = PageFactory.initElements(driver, LandingPage.class);
         landingPage.clickOnSearch();
         searchPage = PageFactory.initElements(driver, SearchPage.class);
@@ -33,11 +36,13 @@ public class AllFunctionality {
     }
 
     public void clickOnSectionMenu(WebDriver driver)throws InterruptedException {
+        TestLogger.log(getClass().getSimpleName() + ": " + CommonAPI.convertToString(new Object(){}.getClass().getEnclosingMethod().getName()));
         landingPage = PageFactory.initElements(driver, LandingPage.class);
         landingPage.clickOnSectionMenu();
     }
 
     public void sectionsMenu(WebDriver driver, String capturedUrl)throws InterruptedException {
+        TestLogger.log(getClass().getSimpleName() + ": " + CommonAPI.convertToString(new Object(){}.getClass().getEnclosingMethod().getName()));
         try {
             clickOnSectionMenu(driver);
         }catch (Exception ex){
@@ -54,6 +59,7 @@ public class AllFunctionality {
     }
 
     public void runAllTheFeatureTest(WebDriver driver) throws InterruptedException, IOException {
+        TestLogger.log(getClass().getSimpleName() + ": " + CommonAPI.convertToString(new Object(){}.getClass().getEnclosingMethod().getName()));
         FetchTheSteps fetchTheSteps = new FetchTheSteps();
         String[] featureSteps = fetchTheSteps.getDataFromExcelFile();
         for (int i=1; i<featureSteps.length; i++){
@@ -61,7 +67,7 @@ public class AllFunctionality {
         }
     }
     public void select(String featureName, WebDriver driver)throws InterruptedException, IOException {
-
+        TestLogger.log(getClass().getSimpleName() + ": " + CommonAPI.convertToString(new Object(){}.getClass().getEnclosingMethod().getName()));
         switch(featureName){
             case "signUp":
                 logIn(driver);
