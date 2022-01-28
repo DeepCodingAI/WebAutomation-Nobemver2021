@@ -15,12 +15,15 @@ public class AllFunctionality {
     SearchPage searchPage = null;
     LogInPage logInPage = null;
 
-    public void signUp(WebDriver driver){
+    String captureUrl = "https://nypost.com/";
+
+    public void logIn(WebDriver driver){
         landingPage = PageFactory.initElements(driver, LandingPage.class);
         logInPage = PageFactory.initElements(driver, LogInPage.class);
         landingPage.clickOnLogIn();
         logInPage.enterEmailAddress("abc123@gmail.com");
-        logInPage.clickOnSignUp();
+        logInPage.enterPassword("abc123");
+        //logInPage.clickOnLogInSubmitButton();
     }
     public void search(WebDriver driver){
         landingPage = PageFactory.initElements(driver, LandingPage.class);
@@ -34,8 +37,13 @@ public class AllFunctionality {
         landingPage.clickOnSectionMenu();
     }
 
-    public void sectionsMenu(WebDriver driver)throws InterruptedException {
-        clickOnSectionMenu(driver);
+    public void sectionsMenu(WebDriver driver, String capturedUrl)throws InterruptedException {
+        try {
+            clickOnSectionMenu(driver);
+        }catch (Exception ex){
+            driver.navigate().to(capturedUrl);
+            clickOnSectionMenu(driver);
+        }
         sectionPage = PageFactory.initElements(driver,SectionMenuPage.class);
         String headLineNews = sectionPage.goToMetroPage(driver).getHeadLineNewsText();
         System.out.println(headLineNews);
@@ -53,12 +61,13 @@ public class AllFunctionality {
         }
     }
     public void select(String featureName, WebDriver driver)throws InterruptedException, IOException {
+
         switch(featureName){
             case "signUp":
-                signUp(driver);
+                logIn(driver);
                 break;
             case "sectionsMenu":
-                sectionsMenu(driver);
+                sectionsMenu(driver,captureUrl);
                 break;
             case "search":
                 search(driver);
