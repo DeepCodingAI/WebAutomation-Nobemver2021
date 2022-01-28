@@ -2,6 +2,7 @@ package base;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.LogStatus;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -116,26 +117,30 @@ public class CommonAPI {
     public WebDriver getLocalDriver(String OS, String browserName){
         if(browserName.equalsIgnoreCase("chrome")){
             if(OS.equalsIgnoreCase("OS X")){
-                System.setProperty("webdriver.chrome.driver", "Generic/driver/chromedriver");
+                //System.setProperty("webdriver.chrome.driver", "Generic/driver/chromedriver");
+                WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
             }else if(OS.equalsIgnoreCase("Windows")){
-                System.setProperty("webdriver.chrome.driver", "Generic/driver/chromedriver.exe");
+                //System.setProperty("webdriver.chrome.driver", "Generic/driver/chromedriver.exe");
+                WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
             }
         }else if(browserName.equalsIgnoreCase("firefox")){
             if(OS.equalsIgnoreCase("OS X")){
-                System.setProperty("webdriver.gecko.driver", "Generic/driver/geckodriver");
+                //System.setProperty("webdriver.gecko.driver", "Generic/driver/geckodriver");
+                WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
             }else if(OS.equalsIgnoreCase("Windows")){
-                System.setProperty("webdriver.gecko.driver", "Generic/driver/geckodriver.exe");
+                //System.setProperty("webdriver.gecko.driver", "Generic/driver/geckodriver.exe");
+                WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
             }
         }else if(browserName.equalsIgnoreCase("ie")){
-            System.setProperty("webdriver.ie.driver", "Generic/driver/internetexplorerdriver.exe");
+            //System.setProperty("webdriver.ie.driver", "Generic/driver/internetexplorerdriver.exe");
+            WebDriverManager.iedriver().setup();
             driver = new InternetExplorerDriver();
 
         }else if(browserName.equalsIgnoreCase("safari")){
-            System.setProperty("webdriver.safari.driver", "Generic/driver/safaridriver");
             driver = new SafariDriver();
         }
         return driver;
